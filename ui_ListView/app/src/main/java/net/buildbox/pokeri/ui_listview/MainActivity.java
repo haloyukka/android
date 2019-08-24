@@ -14,6 +14,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -83,8 +89,27 @@ public class MainActivity extends AppCompatActivity {
                     "Java", "Scala", "Basic", "Ruby", "JavaScript",
                     "Python", "PHP", "C#", "COBOL", "LISP", "Scheme",
                     "Haskell", "Erlang", "ASP", "HTML"};
+
+                List<String> list = new ArrayList<>(); // 内部保持用
+                Map<String,Boolean> map = new HashMap<>(); //読み込み用
+                map.put("パターン1",true);
+                map.put("パターン2",false);
+                map.put("パターン3",true);
+                map.put("パターン4",false);
+                map.put("パターン5",true);
+                for(Iterator<Map.Entry<String,Boolean>> iterator = map.entrySet().iterator();iterator.hasNext();){
+                    Map.Entry<String,Boolean>entry = iterator.next();
+                    if(entry.getValue()){
+                        list.add(entry.getKey());
+                    }
+                }
+
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                    this, android.R.layout.simple_list_item_1, language);
+                        this, android.R.layout.simple_list_item_1, list);
+
+
+//                ArrayAdapter<String> adapter = new ArrayAdapter<>(
+//                    this, android.R.layout.simple_list_item_1, language);
 
                 // アダプタの設定
                 listView.setAdapter(adapter);
